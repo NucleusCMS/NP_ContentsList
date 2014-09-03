@@ -1,0 +1,509 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Nucleusプラグイン管理用ヘルプ</title>
+	<style type="text/css">
+	<!--
+		body {
+			font-family: verdana, arial;
+			font-size: small;
+		}
+
+		h1 {
+			font-size: large;
+			border-bottom: 1px gray dashed;
+			color: #596d9d;
+			text-align: left;
+		}
+
+		h2 {
+			font-size: medium;
+			border: 1px solid #ddd;
+			background-color: whitesmoke;
+			text-align: left;
+		}
+
+		.page {
+			height: 800px;
+			margin-bottom: 100px;
+		}
+
+		pre {
+			background-color: #ddd;
+			padding: 5px;
+			font-size: small;
+		}
+
+		.example {
+			background-color: #ddd;
+			padding: 5px;
+		}
+
+		ul.templates {
+			font-size: x-small;
+			line-height: 1.1;
+			list-style: none;
+			text-indent: -20px;
+			margin-left: 20px;
+		}
+
+		ul {
+			text-align: left;
+		}
+
+		a:link, a:visited {
+			color: #1D3565;
+			font-weight: bold;
+			text-decoration: underline;
+		}
+
+		a:hover {
+			background-color: whitesmoke;
+		}
+
+		.deprecated {
+			border: 3px solid red;
+			padding: 5px;
+			font-size: medium;
+		}
+
+		tt, code {
+			font-size: small;
+		}
+
+		table {
+			border: 1px solid #ccc;
+		}
+
+		th {
+			background-color: #eee;
+		}
+
+		td {
+			vertical-align: top;
+		}
+
+		.note {
+			background-color: #eee;
+			padding: 5px;
+		}
+		
+		.var {
+		    white-space:nowrap;
+		}
+	-->
+	</style>
+</head>
+<body>
+
+<div class="page">
+<h1>Nucleusプラグインポップアップ・ヘルプ</h1>
+</div>
+
+
+<div class="page">
+<a name="name"></a>
+<h1>テンプレートの名前</h1>
+
+<p>テンプレートの名前は、aからzと0から9のみで構成され、かつスペースを含まないものを付けてください。</p>
+</div>
+
+
+<div class="page">
+<a name="hideblog"></a>
+<h1>表示しない/するブログ</h1>
+
+<p>ContentsListで表示しない、または表示するブログを設定できます。まず、表示する・しないをラジオボタンで選択してから対象となるブログをチェックしてください。これらはテンプレートごとに別々に設定することができます。</p>
+<p>なお、「表示するブログ」の方が選択されていて、かつ、どのブログにもチェックが付いてないと何も表示されなくなりますので設定を変える際は気をつけてください。
+</div>
+
+
+<div class="page">
+<a name="blogorder"></a>
+<h1>ブログのデフォルトの並び順</h1>
+
+<p>同じランクのブログが存在するとき、それらはここで指定した順序で上から並べられます。テンプレートごとに別々に設定することができます。</p>
+</div>
+
+
+<div class="page">
+<a name="catorder"></a>
+<h1>カテゴリーのデフォルトの並び順</h1>
+
+<p>同じランクのカテゴリーが存在するとき、それらはここで指定した順序で上から並べられます。テンプレートごとに別々に設定することができます。</p>
+</div>
+
+
+<div class="page">
+<a name="bloglist"></a>
+<h1>ブログリストテンプレート</h1>
+
+<p>以下のテンプレート変数が利用できます</p>
+
+<h2>全てのパーツで利用可能な変数</h2>
+<table><tr>
+	<th>テンプレート変数</th>
+	<th>説明</th>
+</tr><tr>
+	<td><a href="#skinfile">&lt;%skinfile%&gt;</a></td>
+	<td>スキンフォルダのURL</td>
+</tr></table>
+
+<h2>ブログリスト本体で利用可能な変数</h2>
+<table><tr>
+	<th>テンプレート変数</th>
+	<th>説明</th>
+</tr><tr>
+	<td class="var">&lt;%blogid%&gt;</td>
+	<td>ブログID</td>
+</tr><tr>
+	<td class="var">&lt;%blogurl%&gt;</td>
+	<td>ブログのURL</td>
+</tr><tr>
+	<td class="var">&lt;%blogname%&gt;</td>
+	<td>ブログの名前</td>
+</tr><tr>
+	<td class="var">&lt;%bshortname%&gt;</td>
+	<td>ブログの短縮名</td>
+</tr><tr>
+	<td class="var">&lt;%blogdesc%&gt;</td>
+	<td>ブログの説明</td>
+</tr><tr>
+	<td class="var">&lt;%categorylist%&gt;</a></td>
+	<td>そのブログのカテゴリーリスト。「<a href="#categorylist">カテゴリーリストテンプレート</a>」で設定した形式で表示されます。</td>
+</tr><tr>
+	<td>&lt;%flag%&gt;</td>
+	<td>そのブログが現在選択されているときだけ、「<a href="#flag">カレントブログのフラグ</a>」で設定した内容がこの部分に出力されます。</td>
+</tr><tr>
+</tr></table>
+
+</div>
+
+
+<div class="page">
+<a name="categorylist"></a>
+<h1>カテゴリーリストテンプレート</h1>
+
+<p>以下のテンプレート変数が利用できます</p>
+
+<h2>全てのパーツで利用可能な変数</h2>
+<table><tr>
+	<th>テンプレート変数</th>
+	<th>説明</th>
+</tr><tr>
+	<td><a href="#skinfile">&lt;%skinfile%&gt;</a></td>
+	<td>スキンフォルダのURL</td>
+</tr></table>
+
+<h2>カテゴリーリスト本体で利用可能な変数</h2>
+<table><tr>
+	<th>テンプレート変数</th>
+	<th>説明</th>
+</tr><tr>
+	<td class="var">&lt;%blogid%&gt;</td>
+	<td>ブログID</td>
+</tr><tr>
+	<td class="var">&lt;%blogurl%&gt;</td>
+	<td>ブログのURL</td>
+</tr><tr>
+	<td class="var">&lt;%blogname%&gt;</td>
+	<td>ブログの名前</td>
+</tr><tr>
+	<td class="var">&lt;%bshortname%&gt;</td>
+	<td>ブログの短縮名</td>
+</tr><tr>
+	<td class="var">&lt;%blogdesc%&gt;</td>
+	<td>ブログの説明</td>
+</tr><tr>
+	<td class="var">&lt;%self%&gt;</td>
+	<td> </td>
+</tr><tr>
+	<td class="var">&lt;%catid%&gt;</td>
+	<td>カテゴリーID</td>
+</tr><tr>
+	<td class="var">&lt;%catlink%&gt;</td>
+	<td>カテゴリーのURL</td>
+</tr><tr>
+	<td class="var">&lt;%catname%&gt;</td>
+	<td>カテゴリーの名前</td>
+</tr><tr>
+	<td class="var">&lt;%catdesc%&gt;</td>
+	<td>カテゴリーの説明</td>
+</tr><tr>
+	<td class="var">&lt;%amount%&gt;</td>
+	<td>そのカテゴリーの記事数</td>
+</tr><tr>
+	<td class="var">&lt;%subcategorylist%&gt;</a></td>
+	<td>そのカテゴリーのサブカテゴリーリスト。「<a href="#subcategorylist">サブカテゴリーリストテンプレート</a>」で設定した形式で表示されます。</td>
+</tr><tr>
+	<td>&lt;%catflag%&gt;</td>
+	<td>そのカテゴリーが現在選択されているときだけ、「<a href="#flag">カレントカテゴリーのフラグ</a>」で設定した内容がこの部分に出力されます。</td>
+</tr><tr>
+	<td>&lt;%if(subcategory)%&gt;<br />　～<br />&lt;%else%&gt;<br />　～<br />&lt;%endif%&gt;</td>
+	<td><a href="#subcategorylist">サブカテゴリー</a>が設定されていて、かつ、1つ以上のサブカテゴリーに1つ以上記事がある場合、ifからelse(elseが無い場合はendif)までが出力されます。(その必要は無いはずですが、入れ子はできません)</td>
+</tr></table>
+
+</div>
+
+<div class="page">
+<a name="subcategorylist"></a>
+<h1>サブカテゴリーリストテンプレート</h1>
+
+<p>私タカのサイトで配布している<a href="http://reverb.jp/vivian/download.php?itemid=NP_MultipleCategories">NP_MultipleCategories改造版</a>でサブカテゴリーの作成ができるのですが、それらを表示するためのテンプレートです。</p>
+
+<h2>全てのパーツで利用可能な変数</h2>
+<table><tr>
+	<th>テンプレート変数</th>
+	<th>説明</th>
+</tr><tr>
+	<td><a href="#skinfile">&lt;%skinfile%&gt;</a></td>
+	<td>スキンフォルダのURL</td>
+</tr></table>
+
+<h2>サブカテゴリーリスト本体で利用可能な変数</h2>
+<p><a href="#categorylist">カテゴリーリストテンプレート</a>本体で使える変数(&lt;%if(subcategory)%&gt;を除く)プラス、以下の変数が利用できます。</p>
+<table><tr>
+	<th>テンプレート変数</th>
+	<th>説明</th>
+</tr><tr>
+	<td class="var">&lt;%subcatid%&gt;</td>
+	<td>サブカテゴリーID</td>
+</tr><tr>
+	<td class="var">&lt;%sublink%&gt;</td>
+	<td>サブカテゴリーのURL</td>
+</tr><tr>
+	<td class="var">&lt;%subname%&gt;</td>
+	<td>サブカテゴリーの名前</td>
+</tr><tr>
+	<td class="var">&lt;%subdesc%&gt;</td>
+	<td>サブカテゴリーの説明</td>
+</tr><tr>
+	<td class="var">&lt;%subamount%&gt;</td>
+	<td>そのサブカテゴリーの記事数</td>
+</tr><tr>
+	<td>&lt;%subflag%&gt;</td>
+	<td>そのサブカテゴリーが現在選択されているときだけ、「<a href="#flag">カレントサブカテゴリーのフラグ</a>」で設定した内容がこの部分に出力されます。</td>
+</tr><tr>
+</tr></table>
+
+</div>
+
+
+<div class=page>
+<a name="flag"></a>
+<h1>カレントのフラグ</h1>
+
+<p>ここで設定した内容がテンプレートのそれぞれ<br /><br />
+<tt>&lt;%flag%&gt;</tt>(ブログリスト)<br /><br />
+<tt>&lt;%catflag%&gt;</tt>(カテゴリーリスト)<br /><br />
+<tt>&lt;%subflag%&gt;</tt>(サブカテゴリーリスト)<br /><br />
+の部分に、<strong>そのブログ、カテゴリー、サブカテゴリーが現在選択されている時のみ</strong>出力されます。選択されていないブログ、カテゴリー、サブカテゴリーでは何も出力されません。</p>
+
+</div>
+
+
+<div class=page>
+<a name="skinfile"></a>
+<h1>スキン/テンプレート変数：skinfile</h1>
+
+<p>インポートされたスキンから、スキンのurlに相対リンクを張るときに使う。最良の結果を得るためには、<a 
+href="#parser-properties">パーサーのプロパティ</a><tt>IncludePrefix</tt>と共に使うこと。</p>
+
+<h2>引数</h2>
+<ul>
+<li><strong>filename</strong>：ファイルの名前（正確なURLに変換される） </li>
+</ul>
+
+<h2>スキンタイプ</h2>
+<p>すべて</p>
+
+<h2>例</h2>
+<pre>&lt;%skinfile(mystyle.css)%&gt;</pre>
+
+</div>
+
+
+<div class=page>
+<a name="parser-properties"></a>
+<h1>パーサーのプロパティ</h1>
+
+<p>利用可能なパーサーオプションを以下に記述する。</p>
+
+<table>
+<caption>パーサーのプロパティ</caption>
+<tbody>
+<tr><th>オプション名</th><th>値</th></tr>
+<tr>
+<td>Includeモード</td>
+<td>
+<ul>
+<li><strong>normal</strong>：通常の動作；ページを作成する.phpファイルのディレクトリ/urlから相対位置のファイルを取り出しインクルード。 
+
+<li><strong>skindir</strong>：スキンディレクトリ/スキンurlから相対位置のファイルを取り出しインクルード。 </li></ul>
+</td></tr>
+<tr>
+<td>includeプリフィックス</td>
+<td>
+<p>このプロパティはインクルードするファイルそれぞれの頭に追加されるプリフィックスです。例えば、プリフィックスが<tt>base/</tt>でインクルードするファイルが<tt>somefile.txt</tt>なら、最終的には<tt>base/somefile.txt</tt>をインクルードすることになります。</p>
+<p>このプロパティはIncludeModeのプロパティと共に使われることが意図されています。この方法で、<tt><em>skindir/</em>somename/</tt>にインポートされたスキンは、<tt>includemode</tt>を<tt>skindirを使う</tt>に<tt>IncludePrefix</tt>を<tt>somename/</tt>に設定しておくことができます。</p>
+<p><tt>Includeプリフィックス</tt>と<tt>Includeモード</tt>のプロパティは、「スキンの一般的設定」において該当スキンでの包括的な設定が可能です。なお、プロパティが設定されてしまうと、例えばテンプレートも含めたすべてのパースデータにそれが適用されることを心にとめておいてください。</p>
+</td>
+</tr></table>
+
+</div>
+
+
+<div class=page>
+<a name="default"></a>
+<h1>既定のテンプレート</h1>
+
+<p>スキン変数(<tt>&lt;%ContentsList%&gt;</tt>)のパラメーターで特に別のテンプレートを指定していない場合に、利用されるテンプレートを選んで下さい。</p>
+<p><a href="#param">パラメーター記述方法</a></p>
+
+</div>
+
+
+<div class=page>
+<a name="rank"></a>
+<h1>表示ランク</h1>
+
+<p>好きな順番に表示順を並べ替えることができます。同じランクのものが複数ある場合は、各テンプレート編集ページにある</p>
+<ul>
+<li><a href="#blogorder">ブログのデフォルトの並び順</a></li>
+<li><a href="#catorder">カテゴリーのデフォルトの並び順</a></li>
+</ul>
+<p>という項目にて設定された順序にしたがって表示されます。</p>
+<p>また、カテゴリーのランク選択リストの一番下に、「非表示」という項目があります。これを選択するとそのカテゴリーを隠すことができます。(v2.0から)<br />
+※ブログの表示非表示は、各テンプレートに設定項目がありますのでそちらから行えます。</p>
+
+</div>
+
+
+<div class=page>
+<a name="use"></a>
+<h1>使用方法</h1>
+<p>このプラグインをインストール後、まずは「Contents List」の行にある「編集」というリンクをクリックすると現れるオプションページで基本の設定を行ってください。(<a href="#option">設定項目の解説</a>)</p>
+
+<p>基本設定が終わったら、スキンに<code>&lt;%ContentsList%&gt;</code>と書き込むと、その部分にリストが表示されます。デフォルトでは全ブログでカテゴリ展開されます。</p>
+
+<p>表示順や各テンプレートの設定は、Nucleusの管理エリア内、プラグイン一覧ページで「Contents List」の行にある「管理」というリンクをクリックすると編集ページが現れますので、そこから行ってください。</p>
+
+<a name="param"></a>
+<h2>パラメーター指定方法(基本)</h2>
+
+<p>パラメーターでは基本的にカテゴリーリストの展開についての設定ができます。</p>
+<ol>
+<li><code>&lt;%ContentsList(@)%&gt;</code>
+<p>パラメーターに「@」を指定すると、現在選択されているブログのみ、カテゴリーリストが表示されます。他のブログのカテゴリーは表示されません。</p></li>
+
+<li><code>&lt;%ContentsList(-blogname)%&gt;</code>
+<p>ブログのショートネームの頭に「-」をつけて記入すると、「そのブログのカテゴリーは表示しない(他のブログは表示する)」という意味になります。カンマで区切って複数指定可能ですが、下の「表示する」パラメーターとは併用できません。</p></li>
+
+<li><code>&lt;%ContentsList(blogname)%&gt;</code>
+<p>頭に何も付けずにブログのショートネームを記入すると、今度は「そのブログはカテゴリーを表示する(他のブログのカテゴリーは表示しない)」という意味になります。カンマで区切って複数指定可能ですが、上の「表示しない」パラメーターとは併用できません。</p></li>
+</ol>
+
+<pre>ex.<code>&lt;%ContentsList(ablog,bblog)%&gt;</code>
+   <code>&lt;%ContentsList(-ablog,-bblog)%&gt;</code></pre>
+
+<h2>パラメーター指定方法(高度)</h2>
+<ol>
+<li><code>&lt;%ContentsList(-*)%&gt;</code>
+<p>全てのブログのカテゴリーを展開しない</p></li>
+
+<li><code>&lt;%ContentsList(&gt;xxx)%&gt;</code>
+<p>テンプレートを変更します。xxxの部分を変更するテンプレート名に変えて記入してください。</p></li>
+
+<li><code>&lt;%ContentsList(bshortname!='static')%&gt;</code>
+<p>フィルターです。以下を読んで意味のわかる人のみ利用するようにしてください。</p>
+<p>このパラメーターは直接SQL文のWHERE句のところに(複数あるときは and 接続で)渡されます。他のパラメーターでできないことは、これを使うとできるかもしれません。上記の場合だと</p>
+<pre><code>SELECT xxx FROM xxx WHERE <strong>bshortname!='static'</strong></code></pre>
+<p>となります。ブログの短縮名が'static'以外のものが表示されます。</p>
+<p class="note">プラグインスクリプトを見ると、<code>b.</code> を頭に付けたくなるかもしれませんが、前バージョンからの兼ね合いでスクリプトの方で補完するようにしてますので付けないようにしてください。</p>
+<p>[!&lt;&gt;=]のどれかがパラメーター中に入っていれば、そのパラメーターはこのフィルターだとみなされるようにしてます。</p></li>
+
+</ol>
+
+<p>これらは「基本」の方で説明したパラメーターも含めて併用できます。カンマで区切ってください。順番はどうでもいいです。</p>
+
+<pre>ex.<code>&lt;%ContentsList(bshortname!='static',bpublic=1,myblog)%&gt;</code></pre>
+
+<a name="option"></a>
+<h2>プラグインオプション設定項目の解説</h2>
+<ol>
+<li><tt>[URLMode:Normal] When a blog URL ends with &quot;/&quot;, add &quot;index.php&quot; before query strings.</tt>
+<p>通常のURI形式で運用の場合の設定です。各blogのURIがスラッシュで終わる場合、そのblogへのリンクにパラメーター(?blogid=2 のような)が付く場合は、&quot;index.php&quot;を補うか否か。</p>
+<p class="note">例）BlogIDが2のブログのURIがhttp://yourblog.com/だった場合<br />
+「はい」なら ： <code>http://yourblog.com/index.php?blogid=2</code><br />
+「いいえ」なら ： <code>http://yourblog.com/?blogid=2</code><br />
+のようになります。</p></li>
+
+<li><tt>[URLMode:FancyURLs] Name of categoryID parameter.</tt>
+<p>FancyURLs(MagicalURLs)で運用の場合の設定です。各カテゴリーのURIはFancyURLsだと「<code>http://yourblog.com/category/1</code>」、MagicalURLs(mod_rewriteの進化版(?))だと「<code>http://yourblog.com/catid_1.html</code>」の形式がデフォルトとなり、「category」と「catid」という違いがあります。それぞれの運用モードや好みにしたがってどちらかに設定してください。</p></li>
+
+<li><tt>[URLMode:FancyURLs] Magical URLs mode?</tt>
+<p>MagicalURLsで運用している場合は、ここを「はい」にしてください。</p></li>
+
+<li><tt>Parameter order</tt>
+<p>各カテゴリーのURIのパラメーターの順序を設定できます。</p>
+<div class="note">例)
+<dl>
+  <dt>catid -&gt; blogid</dt>
+  <dd><ul>
+    <li><code>http://yourblog.com/index.php?catid=3&amp;blogid=2</code></li>
+    <li><code>http://yourblog.com/category/3/blog/2</code></li>
+    <li><code>http://yourblog.com/catid_3_blog_2.html</code><br />(Magicalは2番目の設定を「catid」にした場合)</li>
+  </ul></dd>
+  <dt>blogid -&gt; catid</dt>
+  <dd><ul>
+    <li><code>http://yourblog.com/index.php?blogid=2&amp;catid=3</code></li>
+    <li><code>http://yourblog.com/blog/2/category/3</code></li>
+    <li><code>http://yourblog.com/blog_2_catid_3.html</code><br />(Magicalは2番目の設定を「catid」にした場合)</li>
+  </ul></dd>
+</dl>
+</div><br /></li>
+
+<li><tt>A-1 : Add blogid to default blog URL. -When default blog URL is completely the same as Site URL, always does not add.-</tt>
+<p>デフォルトブログへのリンクにblogidを付けるか否か。(サイトのURIとデフォルトブログのURIが全く同じの場合は設定に関わらず付きません)</p>
+</li>
+
+<li><tt>A-2 : Add blogid to its category URLs.</tt>
+<p>デフォルトブログの<strong>カテゴリー</strong>へのリンクにはblogidを付けるか否か。</p>
+</li>
+
+<li><tt>B-1 : When a blog URL is different from default blog URL, add blogid to the URL.</tt>
+<p>あるブログのURIがデフォルトブログのURIと異なる場合に、そのブログへのリンクにblogidを付けるか否か。ブログごとに「<code>diary.php</code>」など別ファイルで運用していてURI
+にblogidが付くのが嫌な場合は、これを「はい」にしてください。</p>
+<p class="note"><strong>注意</strong> : 「はい」に設定した場合、デフォルトブログのURIに何らかの値が入力されている時は、1字でも違うと「異なるURI」とみなされるので注意してください。<br />
+例えばデフォルトブログのURIが<br />
+「<code>http://yourblog.com/</code>」、<br />
+BlogID2のブログのURIが<br />
+「<code>http://yourblog.com/index.php</code>」<br />
+だった場合は「異なるURI」とみなされblogidが付かず、このブログを表示できなくなってしまいます。<br />
+なお、もしデフォルトブログのURIが空欄の場合は、各自のNucleus設定・環境により挙動が異なります。</p>
+</li>
+
+<li><tt>B-2 : Add blogid to its category URLs.</tt>
+<p>B-1の状態の場合、そのカテゴリーへのリンクにはblogidを付けるか否か。</p>
+</li>
+
+<li><tt>Use sub category template.(require NP_MultipleCategories0.30j-)</tt>
+<p><a href="http://reverb.jp/vivian/download.php?itemid=NP_MultipleCategories">NP_MultipleCategories0.30j以降</a>がインストールされている場合、サブカテゴリー用のテンプレートを使用するかどうか。</p>
+<p class="note">「はい」を選択してもNP_MultipleCategories0.30j以降がインストールされていない場合は、強制的に「いいえ」に戻されます。<br />
+それ以外でこれを「はい」にした場合、テンプレート編集画面の最後にサブカテゴリー用のフィールドが出現します。あとで「いいえ」に戻した場合、表示はされなくなりますが、データは消えません。このフィールドでサブカテゴリー用の記述をしたあとは、カテゴリーリストのテンプレート内のサブカテゴリーリストを表示したい位置に<code>&lt;%subcategorylist%&gt;</code>と記述してください。これを忘れると表示されません。</p>
+</li>
+
+<li><tt>Show in quick menu</tt>
+<p>管理画面の左メニューに「ContentsList」というメニューを表示するか否か。(このメニューをクリックすると、テンプレートやランクの編集画面へ移動します。)</p>
+</li>
+
+<li><tt>Delete tables on uninstall</tt>
+<p>ContentsListをアンインストールする時に、テンプレートやランクのデータを格納しているテーブルも一緒に削除するか否か。</p>
+</li>
+</ol>
+<br /><br />
+</div>
+
+
+</body>
+</html>
