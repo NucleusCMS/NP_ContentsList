@@ -18,11 +18,14 @@ class NP_ContentsList extends NucleusPlugin {
 	function supportsFeature($what) {
 		switch ($what) {
 			case 'SqlTablePrefix':
+			case 'SqlApi':
 				return 1;
 			default:
 				return 0;
 		}
 	}
+	function getMinNucleusVersion()    { return '350'; }
+	
 	function getTableList() { 
 		return array(
 			sql_table('plug_contentslist'),
