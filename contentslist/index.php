@@ -149,7 +149,7 @@ class ContentsList_ADMIN extends PLUG_ADMIN {
 <?php
 		$query = $this->getRankQuery('blog');
 		$res = sql_query($query);
-		while ($o = mysql_fetch_object($res)) {
+		while ($o = sql_fetch_object($res)) {
 ?>
 			<tr>
 				<td><?php echo $o->id ?></td>
@@ -303,7 +303,7 @@ class ContentsList_ADMIN extends PLUG_ADMIN {
 		
 		$query = $this->getRankQuery('category',$blogid);
 		$res = sql_query($query);
-		while ($o = mysql_fetch_object($res)) {
+		while ($o = sql_fetch_object($res)) {
 ?>
 			<tr>
 				<td><?php echo $o->name ?></td>

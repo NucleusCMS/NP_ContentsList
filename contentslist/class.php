@@ -99,7 +99,7 @@ class PLUG_ADMIN {
 		$query = 'SELECT bnumber, bname FROM '.sql_table('blog').' ORDER BY bnumber';
 		$res = sql_query($query);
 		
-		while ($data = mysql_fetch_assoc($res)) {
+		while ($data = sql_fetch_assoc($res)) {
 			$data['bname'] = htmlspecialchars(shorten($data['bname'],16,'..'));
 			
 			echo '<span style="white-space:nowrap"><input type="checkbox" name="'.$name.'[]" value="'.$data['bnumber'].'"';
@@ -124,7 +124,7 @@ class PLUG_ADMIN {
 		$query = 'SELECT catid, cname FROM '.sql_table('category').'WHERE cblog='.$blogid.' ORDER BY catid';
 		$res = sql_query($query);
 		
-		while ($data = mysql_fetch_assoc($res)) {
+		while ($data = sql_fetch_assoc($res)) {
 			$data['cname'] = htmlspecialchars(shorten($data['cname'],16,'..'));
 			
 			echo '<span style="white-space:nowrap"><input type="checkbox" name="'.$name.'[]" value="'.$data['catid'].'"';
@@ -175,18 +175,18 @@ class PLUG_ADMIN {
 		// 1. select blogs (we'll create optiongroups)
 		$queryBlogs =  'SELECT bnumber, bname FROM '.sql_table('blog').' ORDER BY bnumber';
 		$blogs = sql_query($queryBlogs);
-		if (mysql_num_rows($blogs) > 1) {
+		if (sql_num_rows($blogs) > 1) {
 			$multipleBlogs = 1;
 		}
 
-		while ($oBlog = mysql_fetch_object($blogs)) {
+		while ($oBlog = sql_fetch_object($blogs)) {
 			if ($multipleBlogs) {
 				echo '<optgroup label="',htmlspecialchars($oBlog->bname),'">';
 			}
 		
 			// 2. for each category in that blog
 			$categories = sql_query('SELECT cname, catid FROM '.sql_table('category').' WHERE cblog=' . $oBlog->bnumber . ' ORDER BY cname ASC');
-			while ($oCat = mysql_fetch_object($categories)) {
+			while ($oCat = sql_fetch_object($categories)) {
 				if ($oCat->catid == $selected)
 					$selectText = ' selected="selected" ';
 				else
@@ -243,19 +243,19 @@ class PLUG_TEMPLATE_MANAGER {
 	
 	function exists($name) {
 		$res = sql_query('SELECT * FROM '.$this->table.' WHERE '.$this->namekey.'="'.addslashes($name).'"');
-		return (mysql_num_rows($res) != 0);
+		return (sql_num_rows($res) != 0);
 	}
 	
 	function existsID($id) {
 		$res = sql_query('select * FROM '.$this->table.' WHERE '.$this->idkey.'='.intval($id));
-		return (mysql_num_rows($res) != 0);
+		return (sql_num_rows($res) != 0);
 	}
 	
 	function getNameList($w='') {
 		$where = '';
 		if ($w != '') $where = ' WHERE '.$w;
 		$res = sql_query('SELECT '.$this->idkey.' as id, '.$this->namekey.' as name FROM '.$this->table. $where .' ORDER BY '.$this->namekey);
-		while ($obj = mysql_fetch_object($res)) {
+		while ($obj = sql_fetch_object($res)) {
 			$templates[intval($obj->id)] = $obj->name;
 		}
 		return $templates;
@@ -264,12 +264,12 @@ class PLUG_TEMPLATE_MANAGER {
 	function read($name) {
 		$query = 'SELECT * FROM '.$this->table.' WHERE '.$this->namekey.'="'.addslashes($name).'"';
 		$res = sql_query($query);
-		return mysql_fetch_assoc($res);
+		return sql_fetch_assoc($res);
 	}
 
 	function createTemplate($name) {
 		sql_query('INSERT INTO '.$this->table.' SET '.$this->namekey.'="'. addslashes($name) .'"');
-		$newid = mysql_insert_id();
+		$newid = sql_insert_id();
 		return $newid;
 	}
 

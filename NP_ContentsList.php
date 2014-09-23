@@ -54,18 +54,18 @@ class NP_ContentsList extends NucleusPlugin {
 	function event_PostAddBlog($data) {
 		$b =& $data['blog'];
 		$blogid = $b->getID();
-		$res = mysql_query('INSERT INTO '.sql_table('plug_contentslist_rank').' SET '
+		$res = sql_query('INSERT INTO '.sql_table('plug_contentslist_rank').' SET '
 				. 'rid='.intval($blogid).', rank='.$this->vars['d_blogrank'].', blog=1');
 		if(!$res) {
-			ACTIONLOG::add(WARNING, 'NP_ContentsList : '.mysql_error());
+			ACTIONLOG::add(WARNING, 'NP_ContentsList : '.sql_error());
 		}
 	}
 	
 	function event_PostAddCategory($data) {
-		$res = mysql_query('INSERT INTO '.sql_table('plug_contentslist_rank').' SET '
+		$res = sql_query('INSERT INTO '.sql_table('plug_contentslist_rank').' SET '
 				. 'rid='.intval($data['catid']).', rank='.$this->vars['d_catrank'].', blog=0');
 		if(!$res) {
-			ACTIONLOG::add(WARNING, 'NP_ContentsList : '.mysql_error());
+			ACTIONLOG::add(WARNING, 'NP_ContentsList : '.sql_error());
 		}
 	}
 	
@@ -77,8 +77,8 @@ class NP_ContentsList extends NucleusPlugin {
 		if ($this->getOption('subcatfield') == 'yes') {
 			if ($manager->pluginInstalled('NP_MultipleCategories')) {
 				$check_column = sql_query('SELECT * FROM '. sql_table('plug_contentslist'). ' WHERE 1=0');
-				for ($i=0; $i<mysql_num_fields($check_column); $i++) {
-					if ($meta = mysql_fetch_field($check_column)) {
+				for ($i=0; $i<sql_num_fields($check_column); $i++) {
+					if ($meta = sql_fetch_field($check_column)) {
 						$names[] = $meta->name;
 					}
 				}
@@ -134,8 +134,8 @@ class NP_ContentsList extends NucleusPlugin {
 			rank int (11) not null)');
 		
 		$check_column = sql_query('SELECT * FROM '. sql_table('plug_contentslist'). ' WHERE 1=0');
-		for ($i=0; $i<mysql_num_fields($check_column); $i++) {
-			if ($meta = mysql_fetch_field($check_column)) {
+		for ($i=0; $i<sql_num_fields($check_column); $i++) {
+			if ($meta = sql_fetch_field($check_column)) {
 				$names[] = $meta->name;
 			}
 		}
@@ -144,7 +144,7 @@ class NP_ContentsList extends NucleusPlugin {
 			sql_query ('ALTER TABLE '.sql_table('plug_contentslist').' ADD UNIQUE (name)');
 		}
 		$check_rows = sql_query('SELECT rid FROM '. sql_table('plug_contentslist_rank'));
-		if (mysql_num_rows($check_rows) < 1) {
+		if (sql_num_rows($check_rows) < 1) {
 
 			$verup_file = $this->getDirectory().'/_verup.php';
 			include_once ($verup_file);
@@ -182,14 +182,14 @@ class NP_ContentsList extends NucleusPlugin {
 			}
 
 			$res = sql_query('SELECT bnumber FROM '.sql_table('blog'));
-			while ($row = mysql_fetch_row($res)) {
+			while ($row = sql_fetch_row($res)) {
 				$query = 'INSERT INTO '.sql_table('plug_contentslist_rank'). ' SET ';
 				$query .= 'blog=1, rid='. $row[0] .', rank='. $this->vars['d_blogrank'];
 				sql_query($query);
 			}
 
 			$res = sql_query('SELECT catid FROM '.sql_table('category'));
-			while ($row = mysql_fetch_row($res)) {
+			while ($row = sql_fetch_row($res)) {
 				$query = 'INSERT INTO '.sql_table('plug_contentslist_rank'). ' SET ';
 				$query .= 'blog=0, rid='. $row[0] .', rank='. $this->vars['d_catrank'];
 				sql_query($query);
@@ -316,7 +316,7 @@ class NP_ContentsList extends NucleusPlugin {
 			$query .= ' WHERE tp_def=1';
 		}
 		$res = sql_query($query);
-		if(!($tp = mysql_fetch_assoc($res))) return;
+		if(!($tp = sql_fetch_assoc($res))) return;
 		$tp = array_map(array('NP_ContentsList','parse_skinfile_var'),$tp);
 		$h = explode("/",$tp['hideblog']);
 		$h = array_map("intval",$h);
@@ -346,7 +346,7 @@ class NP_ContentsList extends NucleusPlugin {
 		echo $tp['header'];
 
 		$res = sql_query($query);
-		while ($data = mysql_fetch_assoc($res)) {
+		while ($data = sql_fetch_assoc($res)) {
 			if (!$data['blogurl']) {
 				$data['blogurl'] = $defurl;
 			}
@@ -437,7 +437,7 @@ class NP_ContentsList extends NucleusPlugin {
 						}
 					}
 
-					while ($catdata = mysql_fetch_assoc($cres)) {
+					while ($catdata = sql_fetch_assoc($cres)) {
 						
 						$temp_catlist = "";
 						$myblogurl = $paramblogurl;
@@ -478,9 +478,9 @@ class NP_ContentsList extends NucleusPlugin {
 						// sub category ---
 						if ($subcat && (!$subcurrent || $catid == $catdata['catid']) && !$subnoOpen) {
 							$sres = sql_query("SELECT scatid as subcatid, sname as subname, sdesc as subdesc FROM ".sql_table('plug_multiple_categories_sub')." WHERE catid=".$catdata['catid']);
-							if (mysql_num_rows($sres) > 0) {
+							if (sql_num_rows($sres) > 0) {
 								$subliststr = "";
-								while ($subdata =  mysql_fetch_assoc($sres)) {
+								while ($subdata =  sql_fetch_assoc($sres)) {
 									$ares = sql_query(
 										'SELECT count(i.inumber) FROM '
 										. sql_table('item').' as i, '
@@ -490,7 +490,7 @@ class NP_ContentsList extends NucleusPlugin {
 										. ' and i.inumber=p.item_id'
 										. ' and p.subcategories REGEXP "(^|,)'.$subdata['subcatid'].'(,|$)"'
 									);
-									if ($ares && $row = mysql_fetch_row($ares)) {
+									if ($ares && $row = sql_fetch_row($ares)) {
 										$subdata['subamount'] = $row[0];
 										if ($subdata['subamount'] > 0) {
 											$temp_catlist = preg_replace("/<%if\(subcategory\)%>([\s\S]+(?=<%else%>))?(?:<%else%>[\s\S]*)?<%endif%>/","$1",$tp['catlist']);
@@ -512,7 +512,7 @@ class NP_ContentsList extends NucleusPlugin {
 									$catdata['subcategorylist'] .= $tp['subfooter'];
 								}
 							}
-							mysql_free_result($sres);
+							sql_free_result($sres);
 						}
 						// ---------------
 						
@@ -529,7 +529,7 @@ class NP_ContentsList extends NucleusPlugin {
 					}
 					$temp .= $tempcat;
 					$temp .= $tp['catfooter'];
-					mysql_free_result($cres);
+					sql_free_result($cres);
 					$temp = (isset($subdata) || isset($tempcat)) ? $temp : '';
 					$item = str_replace("<%categorylist%>",$temp,$tp['list']);
 					break;
@@ -546,7 +546,7 @@ class NP_ContentsList extends NucleusPlugin {
 		echo TEMPLATE::fill($item,$data);
 		
 		}
-		mysql_free_result($res);
+		sql_free_result($res);
 
 		echo $tp['footer'];
 
