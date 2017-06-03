@@ -1,7 +1,7 @@
 <?php
 
 class UPDATE {
-	function UPDATE() {
+	function __construct() {
 
 /**
   * 0.2からのバージョンアップの場合は、
