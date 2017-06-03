@@ -32,15 +32,6 @@
 
 
 
-//		$language = ereg_replace( '[\\|/]', '', getLanguageName());
-//	$contentslist_langfile = $oPluginAdmin->plugin->getDirectory().'/'.$language.'.php';
-//	if (strstr(strtolower($CONF['Language']),"japan") && file_exists($contentslist_langfile)) {
-//		include ($contentslist_langfile);
-//	} else {
-//		include ($oPluginAdmin->plugin->getDirectory().'/english.php');
-//	}
-
-
 	include($contentslist_classfile);
 	
 // ------------------------------------------------------------------
