@@ -11,7 +11,7 @@ class NP_ContentsList extends NucleusPlugin {
 	function getName() { return 'Contents List'; }
 	function getAuthor()  { return 'unknown + Taka + Nucleus(JP) team'; }
 	function getURL() { return 'http://japan.nucleuscms.org/wiki/plugins:contentslist'; }
-	function getVersion() { return '2.1.9'; }
+	function getVersion() { return '2.2'; }
 	function getDescription() { 
 		return 'A blog list including the category list is displayed. &lt;%ContentsList%&gt;.';
 	}
