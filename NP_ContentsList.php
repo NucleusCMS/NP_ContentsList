@@ -75,22 +75,22 @@ class NP_ContentsList extends NucleusPlugin {
 	function event_PostPluginOptionsUpdate($data) {
 		global $manager;
 		
-		if ($data['plugid'] != $this->getID()) return;
+		if (!isset($data['plugid']) || $data['plugid'] != $this->getID()) return;
 		
-		if ($this->getOption('subcatfield') == 'yes') {
-			if ($manager->pluginInstalled('NP_MultipleCategories')) {
-				$check_column = sql_query('SELECT * FROM '. sql_table('plug_contentslist'). ' WHERE 1=0');
-				for ($i=0; $i<sql_num_fields($check_column); $i++) {
-					if ($meta = sql_fetch_field($check_column)) {
-						$names[] = $meta->name;
-					}
+		if ($this->getOption('subcatfield') != 'yes') return;
+		
+		if ($manager->pluginInstalled('NP_MultipleCategories')) {
+			$check_column = sql_query('SELECT * FROM '. sql_table('plug_contentslist'). ' WHERE 1=0');
+			for ($i=0; $i<sql_num_fields($check_column); $i++) {
+				if ($meta = sql_fetch_field($check_column)) {
+					$names[] = $meta->name;
 				}
-				if (!in_array("subheader",$names)) {
-					sql_query ('ALTER TABLE '.sql_table('plug_contentslist').' ADD (subheader text not null, sublist text not null, subfooter text not null, subflag text not null)');
-				}
-			} else {
-				$this->setOption('subcatfield',"no");
 			}
+			if (!in_array("subheader",$names)) {
+				sql_query ('ALTER TABLE '.sql_table('plug_contentslist').' ADD (subheader text not null, sublist text not null, subfooter text not null, subflag text not null)');
+			}
+		} else {
+			$this->setOption('subcatfield',"no");
 		}
 	}
 	
