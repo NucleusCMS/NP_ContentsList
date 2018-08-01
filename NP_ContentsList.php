@@ -235,7 +235,7 @@ class NP_ContentsList extends NucleusPlugin {
 
 // ------------------------
 
-	function doSkinVar(){
+	function doSkinVar($skinType){
 		global $CONF, $manager, $blog, $catid, $archive;
 
 		if ($blog) {
